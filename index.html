@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>onClick</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://checkout.payaza.africa/js/v1/bundle.js"></script>
+
+  <script defer>
+
+    function handleButtonClick() {
+      const payazaCheckout = PayazaCheckout.setup({
+        merchant_key: 'PZ78-PKLIVE-1FE55E6D-D2AA-4B4F-B5FB-80E6F6D29C00',
+        connection_mode: PayazaCheckout.LIVE_CONNECTION_MODE, // PayazaCheckout.LIVE_CONNECTION_MODE || PayazaCheckout.TEST_CONNECTION_MODE
+        checkout_amount: Number(2000),
+        // currency_code: "NGN", // default is NGN. This field is optional 
+        email_address: "example@email.com",
+        first_name: 'John',
+        last_name: 'Doe',
+        phone_number: "+1200000000",
+        transaction_reference: 'shopping_cart',
+        onClose: function() {
+        //   console.log("Closed")
+        },
+        callback: function(callbackResponse) {
+        //   console.log(callbackResponse)
+        }
+      });
+
+      // Alternatively, you can set the onClose and callback function as described below
+      function callback(callbackResponse){
+        // console.log(callbackResponse)
+      }
+
+      function onClose(){
+        // console.log("closed")
+      }
+
+      payazaCheckout.setCallback(callback)
+      payazaCheckout.setOnClose(onClose)
+
+      // Display popup
+      payazaCheckout.showPopup();
+    }//end function handleButtonClick
+
+  </script>
+
+</head>
+
+<body>
+  <button onclick="handleButtonClick()">PAY</button>
+</body>
+
+</html>
